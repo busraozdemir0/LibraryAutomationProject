@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34902.65
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibraryAutomationProject", "LibraryAutomationProject\LibraryAutomationProject.csproj", "{E219A3FA-C3E6-402B-8E86-D23FF0F3C41B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibraryAutomation.Entities", "LibraryAutomation.Entities\LibraryAutomation.Entities.csproj", "{C8B0CF5A-4062-40AD-9C3B-167FF4D16DB6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E219A3FA-C3E6-402B-8E86-D23FF0F3C41B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E219A3FA-C3E6-402B-8E86-D23FF0F3C41B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E219A3FA-C3E6-402B-8E86-D23FF0F3C41B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E219A3FA-C3E6-402B-8E86-D23FF0F3C41B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C8B0CF5A-4062-40AD-9C3B-167FF4D16DB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8B0CF5A-4062-40AD-9C3B-167FF4D16DB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8B0CF5A-4062-40AD-9C3B-167FF4D16DB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8B0CF5A-4062-40AD-9C3B-167FF4D16DB6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F906F76D-4AEB-43B6-8872-192EE6BF508F}
+	EndGlobalSection
+EndGlobal
