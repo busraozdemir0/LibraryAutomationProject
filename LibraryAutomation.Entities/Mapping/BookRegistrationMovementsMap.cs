@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace LibraryAutomation.Entities.Mapping
 {
-    public class BookRegistrationMovementsMap:EntityTypeConfiguration<BookRegistrationMovements>
+    public class BookRegistrationMovementsMap : EntityTypeConfiguration<BookRegistrationMovements>
     {
         public BookRegistrationMovementsMap()
         {
@@ -17,6 +17,9 @@ namespace LibraryAutomation.Entities.Mapping
             this.Property(x => x.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity); // Otomatik artan sayi
             this.Property(x => x.Transaction).IsRequired().HasMaxLength(150);
             this.Property(x => x.Explanation).HasMaxLength(5000);
+
+            // Kitap ile kitap kayit hareketleri tablosu arasinda iliski
+            this.HasRequired(x => x.Book).WithMany(x => x.BookRegistrationMovements).HasForeignKey(x => x.BookId);
         }
     }
 }

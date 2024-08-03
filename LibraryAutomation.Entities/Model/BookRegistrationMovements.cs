@@ -14,5 +14,6 @@ namespace LibraryAutomation.Entities.Model
         public string Transaction { get; set; }
         public string Explanation { get; set; }
         public DateTime CreatedDate { get; set; }
+        public Book Book { get; set; }
     }
 }

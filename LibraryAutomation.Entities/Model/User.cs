@@ -16,5 +16,7 @@ namespace LibraryAutomation.Entities.Model
         public string Address { get; set; }
         public string Email { get; set; }
         public DateTime CreatedDate { get; set; }
+        public List<UserMovements> UserMovements { get; set; }
+        public List<UserRole> UserRoles { get; set; }
     }
 }

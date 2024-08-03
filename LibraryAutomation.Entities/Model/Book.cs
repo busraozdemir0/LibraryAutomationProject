@@ -20,5 +20,10 @@ namespace LibraryAutomation.Entities.Model
         public DateTime InsertDate { get; set; } = DateTime.Now;
         public DateTime UpdateDate { get; set; } = DateTime.Now;
         public bool IsDeleted { get; set; } = false;
+
+        public BookTypes BookTypes { get; set; } // Tekil iliskilendirme
+        public List<DepositBook> DepositBooks { get; set; }
+        public List<BookMovements> BookMovements { get; set; }
+        public List<BookRegistrationMovements> BookRegistrationMovements { get; set; }
     }
 }

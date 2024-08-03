@@ -12,5 +12,6 @@ namespace LibraryAutomation.Entities.Model
         public int Id { get; set; }
         public string BookType { get; set; }
         public string Explanation { get; set; }
+        public List<Book> Books { get; set; } // Cogul iliskilendirme
     }
 }

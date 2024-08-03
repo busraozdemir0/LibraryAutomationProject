@@ -21,6 +21,8 @@ namespace LibraryAutomation.Entities.Mapping
             this.Property(x => x.Publisher).IsRequired().HasMaxLength(150);
             this.Property(x => x.Explanation).HasMaxLength(5000);
 
+            // Kitap ile kitap turu arasinda bire cok iliski
+            this.HasRequired(x => x.BookTypes).WithMany(x => x.Books).HasForeignKey(x => x.BookTypeId);
         }
     }
 }

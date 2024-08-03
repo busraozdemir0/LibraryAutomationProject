@@ -14,5 +14,6 @@ namespace LibraryAutomation.Entities.Model
         public int BookId { get; set; }
         public string Transaction { get; set; } // Yapilan islem
         public DateTime CreatedDate { get; set; } // Yapilan islem
+        public Book Book { get; set; }
     }
 }

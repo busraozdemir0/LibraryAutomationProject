@@ -15,6 +15,12 @@ namespace LibraryAutomation.Entities.Mapping
         {
             this.HasKey(x => x.Id); // Primary Key
             this.Property(x => x.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity); // Otomatik artan sayi
+
+            // Kitap ile Emanet kitap tablosu arasinda bire cok iliski
+            this.HasRequired(x => x.Book).WithMany(x => x.DepositBooks).HasForeignKey(x => x.BookId);
+            
+            // Uye ile emanet kitap tablosu arasinda bire cok iliski
+            this.HasRequired(x => x.Member).WithMany(x => x.DepositBooks).HasForeignKey(x => x.MemberId);
         }
     }
 }

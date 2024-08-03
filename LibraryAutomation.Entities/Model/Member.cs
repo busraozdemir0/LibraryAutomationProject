@@ -16,5 +16,6 @@ namespace LibraryAutomation.Entities.Model
         public string ImagePath { get; set; }
         public int NumberOfBooksRead { get; set; } // Okunan kitap sayisi
         public DateTime CreatedDate { get; set; }
+        public List<DepositBook> DepositBooks { get; set; }
     }
 }

@@ -16,6 +16,9 @@ namespace LibraryAutomation.Entities.Mapping
             this.HasKey(x => x.Id); // Primary Key
             this.Property(x => x.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity); // Otomatik artan sayi
             this.Property(x => x.Explanation).HasMaxLength(5000);
+
+            // Kullanici ile kullanici hareketleri tablosu arasindaki iliski
+            this.HasRequired(x => x.User).WithMany(x => x.UserMovements).HasForeignKey(x => x.UserId);
         }
     }
 }

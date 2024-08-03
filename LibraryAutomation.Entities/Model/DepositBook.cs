@@ -15,5 +15,7 @@ namespace LibraryAutomation.Entities.Model
         public DateTime ReceivedDateBook { get; set; } // Kitabi aldigi tarih
         public DateTime DeliveryDateBook { get; set; } // Kitabi iade tarihi
 
+        public Book Book { get; set; }
+        public Member Member { get; set; }
     }
 }

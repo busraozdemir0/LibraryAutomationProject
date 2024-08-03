@@ -12,5 +12,6 @@ namespace LibraryAutomation.Entities.Model
         public int UserId { get; set; }
         public string Explanation { get; set; }
         public DateTime CreatedDate { get; set; }
+        public User User { get; set; }
     }
 }
