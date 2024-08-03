@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LibraryAutomation.Entities.Mapping;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace LibraryAutomation.Entities.Model.Context
 {
     public class LibraryContext : DbContext
     {
-        public LibraryContext() : base()
+        public LibraryContext() : base("LibraryConn") // LibraryConn => Web.config tarafindan gelen baglanti stringi
         {
 
         }
@@ -27,5 +28,22 @@ namespace LibraryAutomation.Entities.Model.Context
         public DbSet<User> Users { get; set; }
         public DbSet<UserMovements> UserMovements { get; set; }
         public DbSet<UserRole> UserRoles { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Configurations.Add(new AboutMap());
+            modelBuilder.Configurations.Add(new AnnouncementMap());
+            modelBuilder.Configurations.Add(new BookMap());
+            modelBuilder.Configurations.Add(new BookMovementsMap());
+            modelBuilder.Configurations.Add(new BookRegistrationMovementsMap());
+            modelBuilder.Configurations.Add(new BookTypesMap());
+            modelBuilder.Configurations.Add(new ContactMap());
+            modelBuilder.Configurations.Add(new DepositBookMap());
+            modelBuilder.Configurations.Add(new MemberMap());
+            modelBuilder.Configurations.Add(new RoleMap());
+            modelBuilder.Configurations.Add(new UserMap());
+            modelBuilder.Configurations.Add(new UserMovementsMap());
+            modelBuilder.Configurations.Add(new UserRoleMap());
+        }
     }
 }
