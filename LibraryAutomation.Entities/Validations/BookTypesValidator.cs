@@ -17,6 +17,10 @@ namespace LibraryAutomation.Entities.Validations
                 .WithMessage("Kitap Türü alanı en fazla 150 karakter olabilir.");
 
             RuleFor(x => x.BookType)
+                .MinimumLength(5)
+                .WithMessage("Kitap Türü alanı en az 5 karakter olabilir.");
+
+            RuleFor(x => x.BookType)
                 .NotEmpty()
                 .WithMessage("Kitap Türü alanı boş geçilemez.");
         }

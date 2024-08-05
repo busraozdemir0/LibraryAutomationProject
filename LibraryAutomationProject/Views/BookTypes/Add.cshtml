@@ -1,0 +1,37 @@
+﻿
+@model LibraryAutomation.Entities.Model.BookTypes
+@{
+    ViewBag.Title = "Add";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg">
+        <div class="ibox">
+            <div class="ibox-head">
+                Kitap Türü Ekleme Sayfası
+            </div>
+            <div class="ibox-body">
+                <form action="Add" method="post">
+                    @Html.AntiForgeryToken() @* Dogrulama(Fluent Validasyon) mesajlarinin gozukmesi icin *@
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        Kitap Türü :
+                        <input type="text" name="BookType" class="form-control" />
+                        @Html.ValidationMessageFor(x => x.BookType, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        Açıklama :
+                        <textarea name="Explanation" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Ekle" class="btn btn-success" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

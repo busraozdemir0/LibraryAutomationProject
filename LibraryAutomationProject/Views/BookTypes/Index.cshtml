@@ -1,0 +1,63 @@
+﻿@using PagedList
+@using PagedList.Mvc
+@model PagedList.IPagedList<LibraryAutomation.Entities.Model.BookTypes>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<form action="Index2">
+    <label style="font-weight:bold;">Kitap Türü Ara</label>
+    @Html.TextBox("search") @* ActionResult icine yazilan kelime ile (search) ayni olmalidir. *@
+    @*<input type="text" name="search" />*@
+    <button type="submit">Ara</button>
+</form>
+
+<div class="row">
+    <div class="col-lg">
+        <div class="ibox">
+            <div class="ibox-head">
+                Kitap Türleri Listesi
+            </div>
+            <div class="ibox-body">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <td>Kitap Türü</td>
+                            <td>Açıklama</td>
+                            <td>Düzenle</td>
+                            <td>Sil</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <th>@item.Id</th>
+                                <th>@item.BookType</th>
+                                <th>@item.Explanation</th>
+                                <th><a href="/BookTypes/Update/@item.Id" class="btn btn-warning">Düzenle</a></th>
+                                <th><a href="/BookTypes/Delete/@item.Id" class="btn btn-danger">Sil</a></th>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+                @Html.PagedListPager(Model, page => Url.Action("Index2", "BookTypes", new { page, search = Request.QueryString["search"] }), new PagedListRenderOptions
+                   { // Sayfalama isleminde altta çıkan butonlarin stilinin daha guzel gozukmesi icin
+                       FunctionToTransformEachPageLink = (li, a) =>
+                       {
+                           a.AddCssClass("page-link");
+                           li.InnerHtml = a.ToString();
+                           return li;
+                       }
+                   })
+
+                <a href="/BookTypes/Add" class="btn btn-primary">Yeni Ekle</a>
+            </div>
+        </div>
+    </div>
+</div>
+
