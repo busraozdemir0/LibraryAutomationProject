@@ -21,7 +21,7 @@ namespace LibraryAutomation.Entities.Mapping
             this.Property(x => x.Content).IsRequired().HasMaxLength(500);
             this.Property(x => x.Explanation).HasMaxLength(5000); // Aciklama alani bos gecilebilir
 
-            this.Property(x => x.Id).HasColumnName("ID"); // Id alaninin ID seklinde gosteriyoruz
+            this.Property(x => x.Id).HasColumnName("Id"); 
         }
     }
 }
