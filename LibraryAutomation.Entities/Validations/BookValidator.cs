@@ -16,6 +16,10 @@ namespace LibraryAutomation.Entities.Validations
                 .MaximumLength(30)
                 .WithMessage("Barkod No alanı en fazla 30 karakter olabilir.");
 
+            RuleFor(x => x.BookTypeId)
+                .NotEmpty()
+                .WithMessage("Kitap türü alanı boş geçilemez.");
+
             RuleFor(x => x.BarcodeNo)
                 .NotEmpty()
                 .WithMessage("Barkod No alanı boş geçilemez.");

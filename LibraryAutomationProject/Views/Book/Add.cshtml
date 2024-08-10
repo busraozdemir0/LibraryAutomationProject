@@ -1,0 +1,76 @@
+﻿@model LibraryAutomation.Entities.Model.Book
+
+@{
+    ViewBag.Title = "Add";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg">
+        <div class="ibox">
+            <div class="ibox-head">
+                <b>Kitap Ekleme Sayfası</b>
+            </div>
+            <div class="ibox-body">
+
+                @using (Html.BeginForm("Add", "Book", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken() @* Dogrulama(Fluent Validasyon) mesajlarinin gozukmesi icin *@
+                    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+                    <div class="form-group">
+                        <b>Kitap Türü: </b>
+                        @Html.DropDownListFor(x => x.BookTypeId, (SelectList)ViewBag.bookTypesList, "---Seçim Yapınız---", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.BookTypeId, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        <b>Barkod No: </b>
+                        @Html.TextBoxFor(x => x.BarcodeNo, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.BarcodeNo, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        <b>Kitap Adı: </b>
+                        @Html.TextBoxFor(x => x.BookName, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.BookName, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        <b>Yazarı: </b>
+                        @Html.TextBoxFor(x => x.WriterName, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.WriterName, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        <b>Yayın Evi: </b>
+                        @Html.TextBoxFor(x => x.Publisher, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.Publisher, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        <b>Stok Adedi: </b>
+                        @Html.TextBoxFor(x => x.StockCount, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.StockCount, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        <b>Sayfa Sayısı: </b>
+                        @Html.TextBoxFor(x => x.PageCount, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.PageCount, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        <b>Açıklama: </b>
+                        @Html.TextAreaFor(x => x.Explanation, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success">Ekle</button>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
+
