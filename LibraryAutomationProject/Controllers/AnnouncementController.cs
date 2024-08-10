@@ -38,5 +38,11 @@ namespace LibraryAutomationProject.Controllers
             );
             return Json(new { success = false, errors }, JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult AnnouncementGet(int? id)
+        {
+            var model = announcementDAL.GetByFilter(context, x => x.Id == id);
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
     }
 }
