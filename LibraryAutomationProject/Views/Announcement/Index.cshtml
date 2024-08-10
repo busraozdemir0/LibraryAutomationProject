@@ -88,6 +88,8 @@
 @* Bu kutuphaneyi tarih formatlamak icin dahil ettik. Eger projemizde olmasaydi nuget package'den Moment.js indirecektik(Y da intten linkini bularak) *@
 <script src="~/AdminDashboard/admincast-master/html/dist/assets/vendors/moment/min/moment.min.js"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
 <script>
     $(document).ready(function () {
         List();
@@ -117,7 +119,7 @@
                         '</td> <td>'
                         +'<a href=# class="btnUpdate btn btn-warning btn-sm" data-id="' + item.Id + '" ><i class="fa fa-edit"></i></a> |'
                         + '<a href=/Announcement/Detail/' + item.Id +' class="btn btn-info btn-sm"><i class="fa fa-info"></i></a> |'
-                        + '<a href=/Announcement/Delete/' + item.Id +' class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a> |'
+                        + '<a href=# data-id=' + item.Id +' class="btnDelete btn btn-danger btn-sm"><i class="fa fa-trash"></i></a> |'
                         +'</td> </tr > ';
                     $('#tbl tbody').append(row); // ilgili satiri id'si tbl olanin tbody'sine ekleme yap
 
@@ -196,6 +198,7 @@
 </script>
 
 <script>
+    // Ekleme isleminden sonra modaldaki inputlari temizle
     function Clean() {
         $('#data-form').trigger('reset');
         $('#exampleModalLabel').html('Duyuru Ekleme Sayfası');
@@ -207,4 +210,60 @@
     function Add() {
         Clean();
     }
+</script>
+
+@* Duyurulari anlik olarak silme (ic ice ajax kullanilmistir)*@
+
+<script>
+    $(document).on('click', '.btnDelete', function () { // classi btnDelete iceren butona tiklandiginda
+        var id = $(this).data('id'); // action'a gelen id'yi cekme istemi
+        $.ajax({ // ajax istegi gonderelim
+            type: 'get',
+            url: '/Announcement/AnnouncementGet/', // Silme islemini gerceklestirirken silinecek kaydin bilgilerini sweetalert ile gosteriyoruz
+            data: { Id: id },
+            success: function (result) {
+
+                // Tarih formatlama
+                var timestamp = parseInt(result.CreatedDate.replace("/Date(", "").replace(")/", ""));
+                var serverDate = new Date(timestamp);
+                var correctedDate = new Date(serverDate.getTime() - serverDate.getTimezoneOffset() * 60000);
+                var formattedDate = correctedDate.toISOString().slice(0, 16);
+
+                Swal.fire({
+                    title: 'Kayıt Silme!',
+                    html: '<b>Id:</b>' + result.Id + '<br/><b>Başlık:</b>' + result.Title +
+                        '<br/><b>Duyuru:</b>' + result.Content + '<br/><b>Açıklama:</b>' + result.Explanation + '<br/><b>Tarih:</b>' + formattedDate,
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Evet!',
+                    cancelButtonText: 'Hayır!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            type: 'post',
+                            url: '/Announcement/AnnouncementDelete/',
+                            data: { Id: id },
+                            success: function () {
+                                List();
+                                Clean();
+
+                                Swal.fire('Silindi!',
+                                    'Kayıt silme işlemi başarıyla gerçekleşti.',
+                                    'success'
+                                )
+                            },
+                            error: function () {
+                                alert('Silme işlemi başarısız oldu.');
+                            }
+                        });
+                    }
+                });
+            },
+            error: function () {
+                alert('Bir hata oluştu');
+            }
+        });
+    });
 </script>

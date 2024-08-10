@@ -44,5 +44,12 @@ namespace LibraryAutomationProject.Controllers
             var model = announcementDAL.GetByFilter(context, x => x.Id == id);
             return Json(model, JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult AnnouncementDelete(int? id)
+        {
+            announcementDAL.Delete(context, x => x.Id == id);
+            announcementDAL.Save(context);
+            return Json(new { success = true });
+        }
     }
 }
