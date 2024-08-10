@@ -1,0 +1,82 @@
+﻿@model List<LibraryAutomation.Entities.Model.Announcement>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg">
+        <div class="ibox">
+            <div class="ibox-head">
+                Duyuru Listesi
+            </div>
+            <div class="ibox-body">
+                <table class="table table-bordered table-striped" id="tbl">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <td>Başlık</td>
+                            <td>Duyuru</td>
+                            <td>Açıklama</td>
+                            <td>Tarih</td>
+                            <td>İşlemler</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @*
+                            Bu kisimda ajax ile duyurulari listeletiyoruz
+                        *@
+                    </tbody>
+                </table>
+
+                <div class="form-group">
+                    @Html.ActionLink("Yeni", "Add", null, new { @class = "btn btn-success" })
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/AdminDashboard/admincast-master/html/dist/assets/vendors/jquery/dist/jquery.min.js"></script>
+
+@* Bu kutuphaneyi tarih formatlamak icin dahil ettik. Eger projemizde olmasaydi nuget package'den Moment.js indirecektik(Y da intten linkini bularak) *@
+<script src="~/AdminDashboard/admincast-master/html/dist/assets/vendors/moment/min/moment.min.js"></script>
+
+<script>
+    $(document).ready(function () { // Sayfa yuklendigi zaman
+        $.ajax({
+            type: 'get',
+            url: '@Url.Action("AnnouncementList","Announcement")',
+            success: function (data) {
+                $.each(data, function (Index, item) { // dongu yardimiyla duyurulari listeleme
+
+                    // Tarih formatlama islemi
+                    var millisecond = parseInt(item.CreatedDate.substr(6));
+                    var formattedDate = moment(millisecond).format('DD.MM.YYYY HH:mm:ss');
+
+                    // Duyurulari row row listeleme
+                    var row = '<tr> <th>' + item.Id +
+                        '</th> <td>' + item.Title +
+                        '</td> <td>' + item.Content +
+                        '</td> <td>' + item.Explanation +
+                        '</td> <td>' + formattedDate +
+                        '</td> <td>'
+                        +'<a href=/Announcement/Update/' + item.Id +' class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a> |'
+                        + '<a href=/Announcement/Detail/' + item.Id +' class="btn btn-info btn-sm"><i class="fa fa-info"></i></a> |'
+                        + '<a href=/Announcement/Delete/' + item.Id +' class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a> |'
+                        +'</td> </tr > ';
+                    $('#tbl tbody').append(row); // ilgili satiri id'si tbl olanin tbody'sine ekleme yap
+
+                });
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    });
+</script>
+
+
+
