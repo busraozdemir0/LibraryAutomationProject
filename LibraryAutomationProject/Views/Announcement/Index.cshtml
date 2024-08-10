@@ -1,4 +1,4 @@
-﻿@model List<LibraryAutomation.Entities.Model.Announcement>
+﻿@model LibraryAutomation.Entities.Model.Announcement
 
 @{
     ViewBag.Title = "Index";
@@ -31,13 +31,54 @@
                 </table>
 
                 <div class="form-group">
-                    @Html.ActionLink("Yeni", "Add", null, new { @class = "btn btn-success" })
-
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
+                        Yeni
+                    </button>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<!-- Bootstrap Modal ile Duyuru Ekleme islemi -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Duyuru Ekleme Sayfası</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="data-form">
+                    <div id="textSil">
+                        <div class="form-group">
+                            @Html.TextBoxFor(a => a.Title, new { @class = "form-control", placeholder = "Başlık" })
+                            @Html.ValidationMessageFor(x => x.Title, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            @Html.TextBoxFor(a => a.Content, new { @class = "form-control", placeholder = "Duyuru" })
+                            @Html.ValidationMessageFor(x => x.Content, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            @Html.TextAreaFor(a => a.Explanation, new { @class = "form-control", placeholder = "Açıklama" })
+                            @Html.ValidationMessageFor(x => x.Explanation, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            @Html.TextBoxFor(a => a.CreatedDate, new { @class = "form-control", type = "datetime-local" })
+                            @Html.ValidationMessageFor(x => x.CreatedDate, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-success">Ekle</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <script src="~/AdminDashboard/admincast-master/html/dist/assets/vendors/jquery/dist/jquery.min.js"></script>
 
@@ -45,13 +86,21 @@
 <script src="~/AdminDashboard/admincast-master/html/dist/assets/vendors/moment/min/moment.min.js"></script>
 
 <script>
-    $(document).ready(function () { // Sayfa yuklendigi zaman
+    $(document).ready(function () {
+        List();
+    });
+</script>
+
+<script>
+    function List() { // Sayfa yuklendigi zaman
         $.ajax({
             type: 'get',
             url: '@Url.Action("AnnouncementList","Announcement")',
             success: function (data) {
-                $.each(data, function (Index, item) { // dongu yardimiyla duyurulari listeleme
 
+                $('#tbl tbody').html(''); // islemden sonra tbody temizlenecek, daha sonradan tekrar listelemek icin
+
+                $.each(data, function (Index, item) { // dongu yardimiyla duyurulari listeleme
                     // Tarih formatlama islemi
                     var millisecond = parseInt(item.CreatedDate.substr(6));
                     var formattedDate = moment(millisecond).format('DD.MM.YYYY HH:mm:ss');
@@ -74,6 +123,36 @@
             error: function (error) {
                 console.log(error);
             }
+        });
+    }
+</script>
+
+
+<script>
+    $(document).ready(function () {
+        $('#data-form').submit(function (e) {
+            e.preventDefault(); // sayfanin yenilenmesini onlemek icin
+
+            var formData = $(this).serialize();
+            $.ajax({
+                method: 'post',
+                url: '@Url.Action("AnnouncementAdd")',
+                data: formData,
+                success: function (result) {
+                    if (result.success) {
+                        List(); // islem basarili ise listeleme islemini tekrar gerceklestir
+                        $('#exampleModal').modal('hide'); // islem basarili ise modali kapat
+                        alert(result.message); // Controller tarafina return ile dondurdugumuz json icindeki mesaj gosterilecek
+                    }
+                    else {
+                        // Validasyon hatasi olursa dongu ile hatalari gosterebilme islemi
+                        $.each(result.errors, function (key, value) {
+                            $('[data-valmsg-for="' + key + '"]').text('');
+                            $('[data-valmsg-for="' + key + '"]').text(value[0]);
+                        });
+                    }
+                }
+            });
         });
     });
 </script>
