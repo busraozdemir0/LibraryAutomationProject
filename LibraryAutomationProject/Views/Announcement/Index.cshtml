@@ -5,89 +5,15 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<div class="row">
-    <div class="col-lg">
-        <div class="ibox">
-            <div class="ibox-head">
-                Duyuru Listesi
-            </div>
-            <div class="ibox-body">
-                <table class="table table-bordered table-striped" id="tbl">
-                    <thead>
-                        <tr>
-                            <th>Id</th>
-                            <td>Başlık</td>
-                            <td>Duyuru</td>
-                            <td>Açıklama</td>
-                            <td>Tarih</td>
-                            <td>İşlemler</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @*
-                            Bu kisimda ajax ile duyurulari listeletiyoruz
-                        *@
-                    </tbody>
-                </table>
 
-                <div class="form-group">
-                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal" onclick="Add()">
-                        Yeni
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
-<!-- Bootstrap Modal ile Duyuru Ekleme islemi -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Duyuru Ekleme Sayfası</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form id="data-form">
-                    <div id="textSil">
-                        <div class="form-group">
-                            @Html.HiddenFor(a => a.Id, new { @class = "form-control", placeholder = "Id", id = "txtId", Value = 0 })
-                        </div>
-                        <div class="form-group">
-                            @Html.TextBoxFor(a => a.Title, new { @class = "form-control", placeholder = "Başlık", id = "txtTitle" })
-                            @Html.ValidationMessageFor(x => x.Title, "", new { @class = "text-danger" })
-                        </div>
-                        <div class="form-group">
-                            @Html.TextBoxFor(a => a.Content, new { @class = "form-control", placeholder = "Duyuru", id = "txtAnnouncement" })
-                            @Html.ValidationMessageFor(x => x.Content, "", new { @class = "text-danger" })
-                        </div>
-                        <div class="form-group">
-                            @Html.TextAreaFor(a => a.Explanation, new { @class = "form-control", placeholder = "Açıklama", id = "txtExplanation" })
-                            @Html.ValidationMessageFor(x => x.Explanation, "", new { @class = "text-danger" })
-                        </div>
-                        <div class="form-group">
-                            @Html.TextBoxFor(a => a.CreatedDate, new { @class = "form-control", type = "datetime-local", id = "txtDate" })
-                            @Html.ValidationMessageFor(x => x.CreatedDate, "", new { @class = "text-danger" })
-                        </div>
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-primary">Kaydet</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
+@Html.Partial("_PartialAnnouncement")
+
 
 
 <script src="~/AdminDashboard/admincast-master/html/dist/assets/vendors/jquery/dist/jquery.min.js"></script>
-
-@* Bu kutuphaneyi tarih formatlamak icin dahil ettik. Eger projemizde olmasaydi nuget package'den Moment.js indirecektik(Y da intten linkini bularak) *@
+@* Bu kutuphaneyi tarih formatlamak icin dahil ettik. Eger projemizde olmasaydi nuget package'den Moment.js indirecektik(Ya da intten linkini bularak) *@
 <script src="~/AdminDashboard/admincast-master/html/dist/assets/vendors/moment/min/moment.min.js"></script>
-
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
 <script>
@@ -111,7 +37,7 @@
                     var formattedDate = moment(millisecond).format('DD.MM.YYYY HH:mm:ss');
 
                     // Duyurulari row row listeleme
-                    var row = '<tr> <th>' + item.Id +
+                    var row = '<tr> <td><input type="checkbox" class="recordCheckBox" data-id="'+item.Id+'" /></td> <th>' + item.Id +
                         '</th> <td>' + item.Title +
                         '</td> <td>' + item.Content +
                         '</td> <td>' + item.Explanation +
@@ -265,5 +191,62 @@
                 alert('Bir hata oluştu');
             }
         });
+    });
+</script>
+
+@* En ustteki checkbox'a tikladigimizda tum satirlar secilsin, tekrar basildiginda secimler kaldirilsin *@
+<script>
+    $(document).on('click', '#tdCheck', function () {
+        if ($(this).is(':checked')) { // id'si tdCheck olan eleman seciliyse (en ustteki checkbox) tum kayitlari secili yap
+            $('.recordCheckBox').prop('checked', true);
+        }
+        else {
+            $('.recordCheckBox').prop('checked', false); // secili degilse tum elemanlarin secili olma ozelligini kaldir
+        }
+    });
+</script>
+
+
+@* Checkbox ile secilmis olan kayitlari silecek aja *@
+<script>
+    // deleteButton id'ye sahip butona basildiginda secili olan tum kayitlari silecek olan kod parcasi
+    $(document).on('click', '#deleteButton', function () {
+        var selectedIds = [];
+        $('.recordCheckBox:checked').each(function () { // .recordCheckBox:checked => secili olan kayitlari dongu icinde tek tek donerek silme islemini gerceklestirecegiz
+            selectedIds.push($(this).data('id'));
+        });
+        if (selectedIds.length > 0) {
+
+            Swal.fire({
+                title: 'Kayıt Silme!',
+                icon: 'warning',
+                html: 'Silinecek Kayıt No(lar): </br>' + selectedIds,
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Evet!',
+                cancelButtonText: 'Hayır!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: 'post',
+                        url: '/Announcement/SelectedAnnouncementDelete/',
+                        data: { selectedIds: selectedIds }, // data kismi sunucu tarafina parametre olarak gonderilecek verilerdir.
+                        success: function () {
+
+                            $('.recordCheckBox:checked').closest('tr').remove(); // islem basarili oldugunda yani kayit silindikten sonra o kaydin yer aldigi tr tagini da siliyoruz. (tr icerisi bos gozukmemesi icin)
+
+                            Swal.fire('Silindi!',
+                                'Kayıt silme işlemi başarıyla gerçekleşti.',
+                                'success'
+                            )
+                        },
+                        error: function () {
+                            alert('Silme işlemi başarısız oldu.');
+                        }
+                    });
+                }
+            });
+        }
     });
 </script>

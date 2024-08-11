@@ -5241,6 +5241,7 @@
     <Content Include="Views\Book\Add.cshtml" />
     <Content Include="Views\Book\Update.cshtml" />
     <Content Include="Views\Announcement\Index.cshtml" />
+    <Content Include="Views\Announcement\_PartialAnnouncement.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

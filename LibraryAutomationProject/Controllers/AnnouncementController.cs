@@ -51,5 +51,23 @@ namespace LibraryAutomationProject.Controllers
             announcementDAL.Save(context);
             return Json(new { success = true });
         }
+
+        [HttpPost] 
+        public JsonResult SelectedAnnouncementDelete(List<int> selectedIds) // Ajax ile coklu kayit silme islemi
+        {
+            if (selectedIds != null)
+            {
+                foreach(int id in selectedIds) // Liste formatinda gelen id'ler icinde donup o id'ye sahip kaydi siliyoruz.
+                {
+                    announcementDAL.Delete(context, x => x.Id == id);
+                    announcementDAL.Save(context);
+                }
+
+                return Json(new { success = true });
+            }
+            return Json(new { success = false });
+
+
+        }
     }
 }

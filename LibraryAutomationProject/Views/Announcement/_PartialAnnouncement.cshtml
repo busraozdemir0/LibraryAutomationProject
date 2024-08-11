@@ -1,0 +1,88 @@
+﻿@model LibraryAutomation.Entities.Model.Announcement
+
+
+
+<div class="row">
+    <div class="col-lg">
+  
+        <div class="ibox">
+            <div class="form-group">
+                <button class="btn btn-danger mt-4 ml-4" type="submit" id="deleteButton">Seçili Olanları Sil</button>
+            </div>
+            <div class="ibox-head">
+
+                Duyuru Listesi
+            </div>
+            <div class="ibox-body">
+                <table class="table table-bordered table-striped" id="tbl">
+                    <thead>
+                        <tr>
+                            <td><input type="checkbox" id="tdCheck" /></td>
+                            <th>Id</th>
+                            <td>Başlık</td>
+                            <td>Duyuru</td>
+                            <td>Açıklama</td>
+                            <td>Tarih</td>
+                            <td>İşlemler</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @*
+                    Bu kisimda ajax ile duyurulari listeletiyoruz
+                        *@
+                    </tbody>
+                </table>
+
+                <div class="form-group">
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal" onclick="Add()">
+                        Yeni
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap Modal ile Duyuru Ekleme islemi -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Duyuru Ekleme Sayfası</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="data-form">
+                    <div id="textSil">
+                        <div class="form-group">
+                            @Html.HiddenFor(a => a.Id, new { @class = "form-control", placeholder = "Id", id = "txtId", Value = 0 })
+                        </div>
+                        <div class="form-group">
+                            @Html.TextBoxFor(a => a.Title, new { @class = "form-control", placeholder = "Başlık", id = "txtTitle" })
+                            @Html.ValidationMessageFor(x => x.Title, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            @Html.TextBoxFor(a => a.Content, new { @class = "form-control", placeholder = "Duyuru", id = "txtAnnouncement" })
+                            @Html.ValidationMessageFor(x => x.Content, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            @Html.TextAreaFor(a => a.Explanation, new { @class = "form-control", placeholder = "Açıklama", id = "txtExplanation" })
+                            @Html.ValidationMessageFor(x => x.Explanation, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            @Html.TextBoxFor(a => a.CreatedDate, new { @class = "form-control", type = "datetime-local", id = "txtDate" })
+                            @Html.ValidationMessageFor(x => x.CreatedDate, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Kaydet</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
