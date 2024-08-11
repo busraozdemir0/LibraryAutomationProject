@@ -12,6 +12,7 @@ using System.Web.Security;
 
 namespace LibraryAutomationProject.Controllers
 {
+    [AllowAnonymous] // Herkesin bu controller'a erisebilecegini belirttik
     public class LoginController : Controller
     {
         LibraryContext context = new LibraryContext();
@@ -38,7 +39,7 @@ namespace LibraryAutomationProject.Controllers
             var model = userDAL.GetByFilter(context, x => x.Email == user.Email && x.Password == user.Password);
             if (model != null)
             {
-                FormsAuthentication.SetAuthCookie(model.UserName, false); // Oturum acilmasi islemi icin cookiye userName kaydediliyor (hatirlansin mi bilgisi false)
+                FormsAuthentication.SetAuthCookie(user.Email, false); // Oturum acilmasi islemi icin cookiye email kaydediliyor (hatirlansin mi bilgisi false)
                 return RedirectToAction("Index2", "BookTypes");
             }
             ViewBag.error = "Kullanıcı adı veya şifre yanlış.";

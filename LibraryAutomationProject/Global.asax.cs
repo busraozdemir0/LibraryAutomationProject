@@ -13,6 +13,8 @@ namespace LibraryAutomationProject
     {
         protected void Application_Start()
         {
+            GlobalFilters.Filters.Add(new AuthorizeAttribute()); // Bu sekilde belirttikten sonra hic bir controller'a oturum acmadan ulasamayacagiz.
+
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);

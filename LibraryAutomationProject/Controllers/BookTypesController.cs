@@ -10,6 +10,7 @@ using System.Web.Mvc;
 
 namespace LibraryAutomationProject.Controllers
 {
+    // [Authorize]
     public class BookTypesController : Controller
     {
         // GET: BookTypes
