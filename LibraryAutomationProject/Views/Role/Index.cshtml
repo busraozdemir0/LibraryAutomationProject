@@ -1,0 +1,47 @@
+﻿@model List<LibraryAutomation.Entities.Model.Role>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg">
+        <div class="ibox">
+            <div class="ibox-head">
+                Rol Listesi
+            </div>
+            <div class="ibox-body">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <td>Rol Adı</td>
+                            <td>İşlemler</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <th>@Html.DisplayFor(x => item.Id)</th>
+                                <th>@Html.DisplayFor(x => item.RoleName)</th>
+                                <th>
+                                    @Html.ActionLink("Düzenle", "Update", new { id = item.Id }, new { @class = "btn btn-warning btn-sm" })
+                                    @Html.ActionLink("Sil", "Delete", new { id = item.Id }, new { @class = "btn btn-danger btn-sm", onclick = "return confirm('Kayıt silinsin mi?')" })
+                                </th>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+                <div class="form-group">
+                    @Html.ActionLink("Yeni", "Add", null, new { @class = "btn btn-success" })
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
