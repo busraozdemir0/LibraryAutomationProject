@@ -58,7 +58,7 @@
                                 <td>@Html.DisplayFor(x => user.CreatedDate)</td>
                                 <td>
                                     @Html.ActionLink("Düzenle", "Update", new { id = user.Id }, new { @class = "btn btn-warning btn-sm" }) |
-                                    @Html.ActionLink("Sil", "Delete", new { id = user.Id }, new { @class = "btn btn-danger btn-sm", onclick = "return confirm('Kayıt silinsin mi?')" }) |
+                                    @Html.ActionLink("Sil", "Delete", new { id = user.Id }, new { @class = "btn btn-danger btn-sm", onclick = "return confirm('Kayıt silinsin mi?')" }) 
                                 </td>
                             </tr>
                         }

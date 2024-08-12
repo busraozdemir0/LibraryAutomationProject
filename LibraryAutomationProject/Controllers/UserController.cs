@@ -1,4 +1,6 @@
 ﻿using LibraryAutomation.Entities.DAL;
+using LibraryAutomation.Entities.Mapping;
+using LibraryAutomation.Entities.Model;
 using LibraryAutomation.Entities.Model.Context;
 using LibraryAutomation.Entities.Model.ViewModel;
 using System;
@@ -43,6 +45,53 @@ namespace LibraryAutomationProject.Controllers
             return HttpNotFound();
         }
 
+        public ActionResult Add()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Add(User user)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(user);
+            }
+            userDAL.InsertorUpdate(context, user);
+            userDAL.Save(context);
+            return RedirectToAction("Index2");
+        }
+
+        public ActionResult Update(int? id)
+        {
+            if(id == null)
+            {
+                return HttpNotFound("Id değeri girilmedi");
+            }
+            var model = userDAL.GetById(context, id);
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult Update(User user)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(user);
+            }
+            userDAL.InsertorUpdate(context, user);
+            userDAL.Save(context);
+            return RedirectToAction("Index2");
+        }
+
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+            userDAL.Delete(context, x => x.Id == id);
+            userDAL.Save(context);
+            return RedirectToAction("Index2");
+        }
 
     }
 }

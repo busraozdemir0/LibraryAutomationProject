@@ -5253,6 +5253,8 @@
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\User\UserRoles.cshtml" />
     <Content Include="Views\User\Index2.cshtml" />
+    <Content Include="Views\User\Add.cshtml" />
+    <Content Include="Views\User\Update.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
