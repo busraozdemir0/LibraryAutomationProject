@@ -17,11 +17,6 @@ namespace LibraryAutomationProject.Controllers
     {
         LibraryContext context = new LibraryContext();
         UserDAL userDAL = new UserDAL();
-        // GET: Login
-        public ActionResult Index()
-        {
-            return View();
-        }
 
         public ActionResult Login()
         {

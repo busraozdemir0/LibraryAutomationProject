@@ -1,0 +1,79 @@
+﻿@model LibraryAutomation.Entities.Model.ViewModel.UserRoleViewModel
+
+@{
+    ViewBag.Title = "Index2";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg">
+        <div class="ibox">
+            <div class="ibox-head">
+                Kitap Listesi
+            </div>
+            <div class="ibox-body">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Kullanıcı</th>
+                            <th>Adı Soyadı</th>
+                            <th>Telefon</th>
+                            <th>E-Mail</th>
+                            <th>Kayıt Tarihi</th>
+                            <th>İşlemler</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var user in Model.Users)
+                        {
+                            <tr>
+                                <th>@Html.DisplayFor(x => user.Id)</th>
+                                <th class="dropdown-btn">@Html.DisplayFor(x => user.UserName)</th>
+
+                                @* Kullanicinin rollerini acilir listede gorecegiz *@
+                                <td class="dropdown-container">
+                                    <ul style="list-style-type:none;">
+                                        @foreach (var role in user.UserRoles)
+                                        {
+                                            <li>
+                                                <div style="float:left; margin-top:8px;">
+                                                    @role.Role.RoleName &nbsp;
+
+                                                </div>
+                                                <div style="float:right; margin-top:4px;">
+                                                    @Html.ActionLink("Düzenle", "Update", new { id = role.Id }, new { @class = "btn btn-warning btn-sm" }) |
+                                                    @Html.ActionLink("Sil", "Delete", new { id = role.Id }, new { @class = "btn btn-danger btn-sm", onclick = "return confirm('Kayıt silinsin mi?')" })
+                                                </div>
+                                            </li>
+                                        }
+                                        @Html.ActionLink("Yeni", "Add", new { id = user.Id }, new { @class = "btn btn-success btn-sm", style = "margin-top:8px" }) |
+
+                                    </ul>
+                                </td>
+
+                                <td>@Html.DisplayFor(x => user.NameSurname)</td>
+                                <td>@Html.DisplayFor(x => user.PhoneNumber)</td>
+                                <td>@Html.DisplayFor(x => user.Email)</td>
+                                <td>@Html.DisplayFor(x => user.CreatedDate)</td>
+                                <td>
+                                    @Html.ActionLink("Düzenle", "Update", new { id = user.Id }, new { @class = "btn btn-warning btn-sm" }) |
+                                    @Html.ActionLink("Sil", "Delete", new { id = user.Id }, new { @class = "btn btn-danger btn-sm", onclick = "return confirm('Kayıt silinsin mi?')" }) |
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+                <div class="form-group">
+
+                    @Html.ActionLink("Yeni", "Add", null, new { @class = "btn btn-success" })
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<link href="~/style.css" rel="stylesheet" />
+<script src="~/JavaScript.js"></script>

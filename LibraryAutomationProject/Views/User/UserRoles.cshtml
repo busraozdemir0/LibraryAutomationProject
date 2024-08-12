@@ -1,0 +1,50 @@
+﻿@model List<LibraryAutomation.Entities.Model.UserRole>
+
+@{
+    ViewBag.Title = "UserRoles";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg">
+        <div class="ibox">
+            <div class="ibox-head">
+                Kullanıcı Rolleri Listesi
+            </div>
+            <div class="ibox-body">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <td>Kullanıcı</td>
+                            <td>Rol</td>
+                            <td>İşlemler</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <th>@Html.DisplayFor(x => item.Id)</th>
+                                <th>@Html.DisplayFor(x => item.UserId)</th>
+                                <th>@Html.DisplayFor(x => item.Role.RoleName)</th>
+                                <th>
+                                    @Html.ActionLink("Düzenle", "Update", "Role", new { id = item.Id }, new { @class = "btn btn-warning btn-sm" })
+                                    @Html.ActionLink("Detay", "Detail", "Role", new { id = item.Id }, new { @class = "btn btn-info btn-sm" })
+                                    @Html.ActionLink("Sil", "Delete", "Role", new { id = item.Id }, new { @class = "btn btn-danger btn-sm", onclick = "return confirm('Kayıt silinsin mi?')" })
+                                </th>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+                <div class="form-group">
+
+                    @Html.ActionLink("Yeni", "Add", "Role", null, new { @class = "btn btn-success" })
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

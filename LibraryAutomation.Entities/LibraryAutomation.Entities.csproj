@@ -112,6 +112,7 @@
     <Compile Include="Model\User.cs" />
     <Compile Include="Model\UserMovements.cs" />
     <Compile Include="Model\UserRole.cs" />
+    <Compile Include="Model\ViewModel\UserRoleViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\GenericRepository.cs" />
     <Compile Include="Validations\AboutValidator.cs" />
