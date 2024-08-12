@@ -151,6 +151,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\UserRoleController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -5255,6 +5256,8 @@
     <Content Include="Views\User\Index2.cshtml" />
     <Content Include="Views\User\Add.cshtml" />
     <Content Include="Views\User\Update.cshtml" />
+    <Content Include="Views\UserRole\Add.cshtml" />
+    <Content Include="Views\UserRole\Update.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
