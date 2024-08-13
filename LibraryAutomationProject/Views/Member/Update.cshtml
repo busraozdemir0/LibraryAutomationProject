@@ -1,0 +1,80 @@
+﻿@model LibraryAutomation.Entities.Model.Member
+
+@{
+    ViewBag.Title = "Update";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg">
+        <div class="ibox">
+            <div class="ibox-head">
+                <b>Üye Düzenleme Sayfası</b>
+            </div>
+            <div class="ibox-body">
+
+                @using (Html.BeginForm("Update", "Member", FormMethod.Post, new { enctype = "multipart/form-data" })) // enctype ile Bunun bir resim dosyasi islemi oldugunu belirtiyoruz
+                {
+                    @Html.AntiForgeryToken() @* Dogrulama(Fluent Validasyon) mesajlarinin gozukmesi icin *@
+                    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+                    <div class="form-group">
+                        <img src="@Model.ImagePath" width="100" height="100" />
+                    </div>
+
+                    <div class="form-group">
+                        <b>Görsel: </b>
+                        @Html.TextBoxFor(x => x.ImagePath, new { @class = "form-control", type = "file" })
+                    </div>
+
+                    <div class="form-group">
+                        <b>Adı Soyadı: </b>
+                        @Html.TextBoxFor(x => x.NameSurname, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.NameSurname, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        <b>Telefon Numarası: </b>
+                        @Html.TextBoxFor(x => x.PhoneNumber, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.PhoneNumber, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        <b>Adres: </b>
+                        @Html.TextAreaFor(x => x.Address, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.Address, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        <b>E-Mail: </b>
+                        @Html.TextBoxFor(x => x.Email, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.Email, "", new { @class = "text-danger" })
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <b>Okunan Kitap Sayısı: </b>
+                        @Html.TextBoxFor(x => x.NumberOfBooksRead, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.NumberOfBooksRead, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        <b>Kayıt Tarihi: </b>
+                        @Html.TextBoxFor(x => x.CreatedDate, new { @class = "form-control", type = "datetime-local", Value = Model.CreatedDate.ToString("yyyy-MM-dd HH:mm") })
+                        @Html.ValidationMessageFor(x => x.CreatedDate, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-info">Kaydet</button>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

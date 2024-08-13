@@ -5267,6 +5267,7 @@
     <Content Include="Views\Role\Update.cshtml" />
     <Content Include="Views\Member\Index.cshtml" />
     <Content Include="Views\Member\Add.cshtml" />
+    <Content Include="Views\Member\Update.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
