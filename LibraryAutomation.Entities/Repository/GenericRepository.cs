@@ -20,25 +20,40 @@ namespace LibraryAutomation.Entities.Repository
             context.Set<TEntity>().Remove(model);
         }
 
-        public List<TEntity> GetAll(TContext context, Expression<Func<TEntity, bool>> filter = null, string table = null)
+        public List<TEntity> GetAll(TContext context, Expression<Func<TEntity, bool>> filter = null, params string[] table)
         {
             // Tablo bilgisi geldiyse gelen tabloyu include etmek icin yapiyi duzenledik
 
-            return filter == null ? table == null
-                ? context.Set<TEntity>().ToList() // hem filtreleme hem de include edilecek tablo adi bos ise calisir
-                : context.Set<TEntity>().Include(table).ToList() // eger filtreleme bos fakat table ifadesi bos degilse
+            //return filter == null ? table == null
+            //    ? context.Set<TEntity>().ToList() // hem filtreleme hem de include edilecek tablo adi bos ise calisir
+            //    : context.Set<TEntity>().Include(table).ToList() // eger filtreleme bos fakat table ifadesi bos degilse
 
-                : table == null // eger filter dolu table bos ise
-                ? context.Set<TEntity>().Where(filter).ToList()
-                : context.Set<TEntity>().Include(table).Where(filter).ToList(); // hem filter hem de table ifadesi dolu gelirse
+            //    : table == null // eger filter dolu table bos ise
+            //    ? context.Set<TEntity>().Where(filter).ToList()
+            //    : context.Set<TEntity>().Include(table).Where(filter).ToList(); // hem filter hem de table ifadesi dolu gelirse
+
+            // Ornegin EmanetKitaplar tablosuna birden fazla tabloyu include edecegimiz icin bu sekilde params ile kac tablo gelirse dongu yardimiyla donerek tablolari dahil ediyoruz.
+            IQueryable<TEntity> query = context.Set<TEntity>();
+            foreach (var item in table) // Bir veya birden fazla tablo dahil edilecekse (Hic tablo dahil edilmezse dongu zaten calismayacaktir.)
+            {
+                query = query.Where(filter).Include(item);
+            }
+            return query.ToList();
         }
 
-        public TEntity GetByFilter(TContext context, Expression<Func<TEntity, bool>> filter, string table = null)
+        public TEntity GetByFilter(TContext context, Expression<Func<TEntity, bool>> filter, params string[] table)
         {
             // table degeri bos gelmedigi surece include et
-            return table == null
-                ? context.Set<TEntity>().FirstOrDefault(filter)
-                : context.Set<TEntity>().Include(table).FirstOrDefault(filter);
+            //return table == null
+            //    ? context.Set<TEntity>().FirstOrDefault(filter)
+            //    : context.Set<TEntity>().Include(table).FirstOrDefault(filter);
+        
+            IQueryable<TEntity> query= context.Set<TEntity>();
+            foreach(var item in table) // Bir veya birden fazla tablo dahil edilecekse (Hic tablo dahil edilmezse dongu zaten calismayacaktir.)
+            {
+                query = query.Include(item);
+            }
+            return query.FirstOrDefault(filter);
         }
 
         public TEntity GetById(TContext context, int? id)

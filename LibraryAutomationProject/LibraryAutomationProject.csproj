@@ -148,6 +148,7 @@
     <Compile Include="Controllers\AnnouncementController.cs" />
     <Compile Include="Controllers\BookController.cs" />
     <Compile Include="Controllers\BookTypesController.cs" />
+    <Compile Include="Controllers\DepositBookController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MemberController.cs" />
@@ -5268,6 +5269,9 @@
     <Content Include="Views\Member\Index.cshtml" />
     <Content Include="Views\Member\Add.cshtml" />
     <Content Include="Views\Member\Update.cshtml" />
+    <Content Include="Views\DepositBook\Index.cshtml" />
+    <Content Include="Views\DepositBook\GiveABook.cshtml" />
+    <Content Include="Views\DepositBook\UpdateGiveABook.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

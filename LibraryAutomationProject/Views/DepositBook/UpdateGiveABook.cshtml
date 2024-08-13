@@ -1,0 +1,54 @@
+﻿@model LibraryAutomation.Entities.Model.DepositBook
+
+@{
+    ViewBag.Title = "UpdateGiveABook";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg">
+        <div class="ibox">
+            <div class="ibox-head">
+                <b>Emanet Kitap Düzenleme Sayfası</b>
+            </div>
+            <div class="ibox-body">
+
+                @using (Html.BeginForm("UpdateGiveABook", "DepositBook", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken() @* Dogrulama(Fluent Validasyon) mesajlarinin gozukmesi icin *@
+                    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+                    <div class="form-group">
+                        <b>Üye Adı Soyadı: </b>
+                        @Html.DropDownListFor(x => x.MemberId, (SelectList)ViewBag.memberList, "---Seçim Yapınız---", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.MemberId, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        <b>Kitap Adı: </b>
+                        @Html.DropDownListFor(x => x.BookId, (SelectList)ViewBag.bookList, "---Seçim Yapınız---", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.BookId, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        <b>Kitap Sayısı: </b>
+                        @Html.TextBoxFor(x => x.BookCount, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.BookCount, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        <b>Kitap Aldığı Tarih: </b>
+                        @Html.TextBoxFor(x => x.ReceivedDateBook, new { @class = "form-control", type = "datetime-local", Value=Model.ReceivedDateBook.ToString("yyyy-MM-dd HH:mm") })
+                        @Html.ValidationMessageFor(x => x.ReceivedDateBook, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success">Onay</button>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
+

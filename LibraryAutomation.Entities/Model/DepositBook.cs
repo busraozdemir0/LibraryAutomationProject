@@ -16,7 +16,7 @@ namespace LibraryAutomation.Entities.Model
         public int BookId { get; set; }
         public int BookCount { get; set; }
         public DateTime ReceivedDateBook { get; set; } // Kitabi aldigi tarih
-        public DateTime DeliveryDateBook { get; set; } // Kitabi iade tarihi
+        public DateTime? DeliveryDateBook { get; set; } // Kitap iade tarihi
 
         public Book Book { get; set; }
         public Member Member { get; set; }
