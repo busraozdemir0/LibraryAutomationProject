@@ -37,7 +37,7 @@
                                 <td>
                                     @Html.ActionLink("Düzenle", "UpdateGiveABook", "DepositBook", new { id = item.Id }, new { @class = "btn btn-warning btn-sm" })
                                     @Html.ActionLink("Sil", "Delete", "DepositBook", new { id = item.Id }, new { @class = "btn btn-danger btn-sm", onclick = "return confirm('Kayıt silinsin mi?')" })
-                                    @Html.ActionLink("İade Et", "DeliveryBook", "DepositBook", new { id = item.Id }, new { @class = "btn btn-primary btn-sm" })
+                                    @Html.ActionLink("Teslim Al", "TakeDeliveryBook", "DepositBook", new { id = item.Id }, new { @class = "btn btn-primary btn-sm", onclick = "return confirm('Kitap(lar) iade edilsin mi?')" })
                                 </td>
                             </tr>
                         }

@@ -36,7 +36,14 @@ namespace LibraryAutomation.Entities.Repository
             IQueryable<TEntity> query = context.Set<TEntity>();
             foreach (var item in table) // Bir veya birden fazla tablo dahil edilecekse (Hic tablo dahil edilmezse dongu zaten calismayacaktir.)
             {
-                query = query.Where(filter).Include(item);
+                if(filter != null) // Eger filtre null degilse filtreleyerek listele
+                {
+                    query = query.Where(filter).Include(item); 
+                }
+                else // Eger filtre null ise filtreleme islemini dahil etmeden listele
+                {
+                    query = query.Include(item);
+                }
             }
             return query.ToList();
         }
