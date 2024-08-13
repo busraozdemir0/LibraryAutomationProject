@@ -17,7 +17,20 @@ namespace LibraryAutomationProject.Controllers
     {
         LibraryContext context = new LibraryContext();
         UserDAL userDAL = new UserDAL();
+        UserMovementsDAL userMovementsDAL = new UserMovementsDAL();
+        public void UserMovements(int userId, int processDoId, string explanation)
+        {
+            var model = new UserMovements
+            {
+                Explanation = explanation,
+                ProcessDo = processDoId, // islemi gerceklestiren kulanicinin id'si
+                UserId = userId,
+                CreatedDate = DateTime.Now
+            };
 
+            userMovementsDAL.InsertorUpdate(context, model);
+            userMovementsDAL.Save(context);
+        }
         public ActionResult Login()
         {
             return View();
@@ -35,6 +48,12 @@ namespace LibraryAutomationProject.Controllers
             if (model != null)
             {
                 FormsAuthentication.SetAuthCookie(user.Email, false); // Oturum acilmasi islemi icin cookiye email kaydediliyor (hatirlansin mi bilgisi false)
+
+                // Giris yapma esnasinda kullanici hareketleri tablosuna veri/bilgi ekleme
+                int processDoId = model.Id; // islemi gerceklestiren kulanicinin id'si
+                string explanation = model.UserName + " kulanıcısı sisteme giriş yaptı.";
+                UserMovements(processDoId, processDoId, explanation);
+
                 return RedirectToAction("Index2", "BookTypes");
             }
             ViewBag.error = "Kullanıcı adı veya şifre yanlış.";
@@ -74,6 +93,12 @@ namespace LibraryAutomationProject.Controllers
                         user.CreatedDate = DateTime.Now;
                         userDAL.InsertorUpdate(context, user);
                         userDAL.Save(context);
+
+                        // Kayit olma esnasinda kullanici hareketleri tablosuna veri/bilgi ekleme
+                        var userId = context.Users.Max(x => x.Id); // En son kaydedilen kisinin id'si en buyuk olacagi icin son kullaniciyi cekiyoruz
+                        string explanation = " Yeni bir kulanıcı oluşturuldu.";
+                        UserMovements(userId, userId, explanation);
+
                         return RedirectToAction("Login");
                     }
                 }

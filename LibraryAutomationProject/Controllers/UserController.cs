@@ -11,14 +11,30 @@ using System.Web.Mvc;
 
 namespace LibraryAutomationProject.Controllers
 {
-    //[Authorize(Roles = "Admin,Moderatör")]
-    [AllowAnonymous]
+    [Authorize(Roles = "Admin,Moderatör")]
+    //[AllowAnonymous]
     public class UserController : Controller
     {
         LibraryContext context = new LibraryContext();
         UserDAL userDAL = new UserDAL();
         UserRoleDAL userRoleDAL = new UserRoleDAL();
         RoleDAL roleDAL = new RoleDAL();
+        UserMovementsDAL userMovementsDAL = new UserMovementsDAL();
+        
+        // Kullanici hareketleri tablosuna kayit islemi gerceklestirmek icin olusturulan metod
+        public void UserMovements(int userId, int processDoId, string explanation)
+        {
+            var model = new UserMovements
+            {
+                Explanation=explanation,
+                ProcessDo=processDoId, // islemi gerceklestiren kulanicinin id'si
+                UserId =userId,
+                CreatedDate=DateTime.Now
+            };
+
+            userMovementsDAL.InsertorUpdate(context,model);
+            userMovementsDAL.Save(context);
+        }
 
         // GET: User
         public ActionResult Index()
@@ -59,6 +75,15 @@ namespace LibraryAutomationProject.Controllers
             }
             userDAL.InsertorUpdate(context, user);
             userDAL.Save(context);
+
+            // kullanici eklenmesi esnasinda kullanici hareketleri tablosuna veri/bilgi ekleme
+            int userId = context.Users.Max(x => x.Id); // En son kaydedilen kisinin id'si en buyuk olacagi icin son kullaniciyi cekiyoruz
+            var userName = User.Identity.Name; // Giris yapan kisinin bilgisi
+            var model = userDAL.GetByFilter(context, x => x.Email == userName); // Giris yapan kisinin tum bilgilerini db'den cekiyoruz
+            var processDoId = model.Id; // islemi gerceklestiren kulanicinin id'si
+            string explanation = model.UserName + " kulanıcısı yeni bir kullanıcı ekledi.";
+            UserMovements(userId, processDoId,explanation);
+
             return RedirectToAction("Index2");
         }
 
