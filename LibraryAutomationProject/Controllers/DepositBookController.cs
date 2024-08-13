@@ -42,10 +42,6 @@ namespace LibraryAutomationProject.Controllers
                 return View();
             }
 
-            // Emanet verilen kitap icin kac tane verildiyse (BookCount) kitap tablosunda ilgili kitabin stok adedini azaltıyoruz.
-            var bookModel = bookDAL.GetByFilter(context, x => x.Id == entity.BookId);
-            bookModel.StockCount -= entity.BookCount;
-
             depositBookDAL.InsertorUpdate(context, entity);
             depositBookDAL.Save(context);
 
