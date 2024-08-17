@@ -24,6 +24,7 @@ namespace LibraryAutomationProject.Controllers
             return Json(model, JsonRequestBehavior.AllowGet);
         }
 
+        [Authorize(Roles = "Admin, Moderatör")]
         [HttpPost]
         public JsonResult AnnouncementAdd(Announcement announcement)
         {
@@ -39,12 +40,14 @@ namespace LibraryAutomationProject.Controllers
             return Json(new { success = false, errors }, JsonRequestBehavior.AllowGet);
         }
 
+        [Authorize(Roles = "Admin, Moderatör")]
         public JsonResult AnnouncementGet(int? id)
         {
             var model = announcementDAL.GetByFilter(context, x => x.Id == id);
             return Json(model, JsonRequestBehavior.AllowGet);
         }
 
+        [Authorize(Roles = "Admin, Moderatör")]
         public JsonResult AnnouncementDelete(int? id)
         {
             announcementDAL.Delete(context, x => x.Id == id);
@@ -52,6 +55,7 @@ namespace LibraryAutomationProject.Controllers
             return Json(new { success = true });
         }
 
+        [Authorize(Roles = "Admin, Moderatör")]
         [HttpPost] 
         public JsonResult SelectedAnnouncementDelete(List<int> selectedIds) // Ajax ile coklu kayit silme islemi
         {
@@ -66,8 +70,6 @@ namespace LibraryAutomationProject.Controllers
                 return Json(new { success = true });
             }
             return Json(new { success = false });
-
-
         }
     }
 }

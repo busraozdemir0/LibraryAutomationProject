@@ -11,7 +11,7 @@ using System.Web.Mvc;
 
 namespace LibraryAutomationProject.Controllers
 {
-    // [AllowAnonymous]
+    [Authorize(Roles = "Admin, Moderatör")]
     public class DepositBookController : Controller
     {
         // Emanet Kitaplar ile ilgili islemler

@@ -9,8 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 
 namespace LibraryAutomationProject.Controllers
-{
-    [Authorize(Roles = "Admin, Moderatör")]
+{  
     public class BookController : Controller
     {
         LibraryContext context = new LibraryContext();
@@ -45,12 +44,14 @@ namespace LibraryAutomationProject.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Admin, Moderatör")]
         public ActionResult Add()
         {
             ViewBag.bookTypesList = new SelectList(context.BookTypes, "Id", "BookType"); // Kitap turlerini dropdown'da listeleme
             return View();
         }
 
+        [Authorize(Roles = "Admin, Moderatör")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Add(Book book)
@@ -73,6 +74,7 @@ namespace LibraryAutomationProject.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize(Roles = "Admin, Moderatör")]
         public ActionResult Update(int? id)
         {
             if (id == null)
@@ -85,6 +87,7 @@ namespace LibraryAutomationProject.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Admin, Moderatör")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Update(Book book)
@@ -107,6 +110,7 @@ namespace LibraryAutomationProject.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize(Roles = "Admin, Moderatör")]
         public ActionResult Delete(int? id)
         {
             if (id == null)

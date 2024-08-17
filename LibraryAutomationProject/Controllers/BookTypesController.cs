@@ -10,7 +10,7 @@ using System.Web.Mvc;
 
 namespace LibraryAutomationProject.Controllers
 {
-    // [Authorize]
+  
     public class BookTypesController : Controller
     {
         // GET: BookTypes
@@ -32,6 +32,7 @@ namespace LibraryAutomationProject.Controllers
             return View("Index2",model);
         }
 
+        [Authorize(Roles = "Admin, Moderatör")]
         public ActionResult Add()
         {
             return View();
@@ -39,6 +40,7 @@ namespace LibraryAutomationProject.Controllers
 
         [ValidateAntiForgeryToken] // Dogrulama islemleri icin (Fluent Validation)
         [HttpPost]
+        [Authorize(Roles = "Admin, Moderatör")]
         public ActionResult Add(BookTypes bookTypes)
         {
             if (ModelState.IsValid)
@@ -50,6 +52,7 @@ namespace LibraryAutomationProject.Controllers
             return View(bookTypes);
         }
 
+        [Authorize(Roles = "Admin, Moderatör")]
         public ActionResult Update(int? id)
         {
             if (id == null)
@@ -62,6 +65,7 @@ namespace LibraryAutomationProject.Controllers
 
         [ValidateAntiForgeryToken]
         [HttpPost]
+        [Authorize(Roles = "Admin, Moderatör")]
         public ActionResult Update(BookTypes bookTypes)
         {
             if (ModelState.IsValid)
@@ -73,6 +77,7 @@ namespace LibraryAutomationProject.Controllers
             return View(bookTypes);
         }
 
+        [Authorize(Roles = "Admin, Moderatör")]
         public ActionResult Delete(int? id)
         {
             if (id == null)

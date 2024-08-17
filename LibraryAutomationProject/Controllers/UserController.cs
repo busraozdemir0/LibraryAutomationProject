@@ -12,7 +12,6 @@ using System.Web.Mvc;
 namespace LibraryAutomationProject.Controllers
 {
     [Authorize(Roles = "Admin,Moderatör")]
-    //[AllowAnonymous]
     public class UserController : Controller
     {
         LibraryContext context = new LibraryContext();
