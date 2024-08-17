@@ -29,7 +29,7 @@ namespace LibraryAutomationProject.Controllers
             {
                 model = bookTypesDAL.GetAll(context, x => x.BookType.Contains(search)).ToPagedList(page ?? 1, 3); // 1. sayfadan baslat ve her sayfada en fazla 3 veri olsun.
             }
-            return View("Index",model);
+            return View("Index2",model);
         }
 
         public ActionResult Add()
@@ -45,7 +45,7 @@ namespace LibraryAutomationProject.Controllers
             {
                 bookTypesDAL.InsertorUpdate(context, bookTypes);
                 bookTypesDAL.Save(context);
-                return RedirectToAction("Index");
+                return RedirectToAction("Index2");
             }
             return View(bookTypes);
         }
@@ -68,7 +68,7 @@ namespace LibraryAutomationProject.Controllers
             {
                 bookTypesDAL.InsertorUpdate(context, bookTypes);
                 bookTypesDAL.Save(context);
-                return RedirectToAction("Index");
+                return RedirectToAction("Index2");
             }
             return View(bookTypes);
         }
@@ -81,7 +81,7 @@ namespace LibraryAutomationProject.Controllers
             }
             bookTypesDAL.Delete(context, x => x.Id == id);
             bookTypesDAL.Save(context);
-            return RedirectToAction("Index");
+            return RedirectToAction("Index2");
         }
     }
 }
