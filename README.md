@@ -29,6 +29,7 @@ ASP.NET MVC kullanarak geliştirdiğim projemde dinamik veritabanı işlemleri i
 - Şifremi unuttum sayfası ile şifre güncelleyebilme
 - İlgili bildirim işlemleri için Sweet Alert kullanımı
 - Duyuru işlemlerinde AJAX kullanımı
+- Stok işlemleri için Trigger yapısından faydalanma
 - Kitap türü arama işlemi
 - Sayfalama yapısı
 - Yetkilendirme ve rolleme işlemleri
