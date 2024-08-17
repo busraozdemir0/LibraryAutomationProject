@@ -16,11 +16,13 @@ ASP.NET MVC kullanarak geliştirdiğim projemde dinamik veritabanı işlemleri i
 - Asp.Net MVC
 - MSSQL Server
 - Entity Framework Code First
+- Generic Repository
 - Html, Css
 - JavaScript
 - AJAX
 - Bootstrap
 - Sweet Alert
+- Fluent Validation
   
 # Projenin Öne Çıkan Özellikleri
 - Veritabanı işlemleri için Entity Framework Code First kullanımı
@@ -33,7 +35,7 @@ ASP.NET MVC kullanarak geliştirdiğim projemde dinamik veritabanı işlemleri i
 - Kullanıcılar sayfasında ilgili kullanıcıya atanan rolleri düzenleme
 - Duyurular sayfasında çoklu kayıt silebilme
 - Kullanıcı hareketlerini, kitap hareketlerini, kitap kayıt hareketlerini db'de gözlemleyebilme
-
+- CRUD işlemler sırasında fluent validation kullanımı
 
 # Projenin Görselleri
 
@@ -43,6 +45,9 @@ ASP.NET MVC kullanarak geliştirdiğim projemde dinamik veritabanı işlemleri i
 ### Giriş Yap Sayfası
 ![Ana sayfa](https://github.com/busraozdemir0/LibraryAutomationProject/blob/master/ProjectScreenshots/login.png)
 
+### Şifremi Unuttum Sayfası
+![Ana sayfa](https://github.com/busraozdemir0/LibraryAutomationProject/blob/master/ProjectScreenshots/forgotPasswordPage.png)
+
 ### Kitap Türleri Sayfası
 ![Ana sayfa](https://github.com/busraozdemir0/LibraryAutomationProject/blob/master/ProjectScreenshots/bookTypes.png)
 
@@ -51,6 +56,9 @@ ASP.NET MVC kullanarak geliştirdiğim projemde dinamik veritabanı işlemleri i
 
 ### Kitap Detay Sayfası
 ![Ana sayfa](https://github.com/busraozdemir0/LibraryAutomationProject/blob/master/ProjectScreenshots/bookDetail.png)
+
+### Emanet Kitap İşlemleri
+![Ana sayfa](https://github.com/busraozdemir0/LibraryAutomationProject/blob/master/ProjectScreenshots/emanetKitapIslemleri.png)
 
 ### Duyurular Sayfası - Güncelleme İşlemi
 ![Ana sayfa](https://github.com/busraozdemir0/LibraryAutomationProject/blob/master/ProjectScreenshots/announcementUpdate.png)
@@ -63,6 +71,9 @@ ASP.NET MVC kullanarak geliştirdiğim projemde dinamik veritabanı işlemleri i
 
 ### Kullanıcılar Sayfası
 ![Ana sayfa](https://github.com/busraozdemir0/LibraryAutomationProject/blob/master/ProjectScreenshots/users.png)
+
+### Kullanıcı Ekleme Sayfası - Validation
+![Ana sayfa](https://github.com/busraozdemir0/LibraryAutomationProject/blob/master/ProjectScreenshots/validation.png)
 
 ### Üyeler Sayfası
 ![Ana sayfa](https://github.com/busraozdemir0/LibraryAutomationProject/blob/master/ProjectScreenshots/members.png)
