@@ -4,11 +4,10 @@
 ###
 Kütüphane Yönetim Sistemi; kitap, kitap türleri, kullanıcılar, üyeler, duyurular gibi alanlar üzerinde işlemler yaparak kitap yönetimini sağlayabileceğimiz bir web projesidir. 
 Kayıt Ol sayfası aracılığıyla kayıt olan kullanıcı Panel'e yönlendirilmektedir. Admin ve Moderatör rolündeki kullanıcı sistemde birçok şeye erişebilirken Kullanıcı rolü kısıtlı işlemleri görebilmektedir.
-Hazırladığım bu panel yardımıyla verilen emanet kitapların alma ve teslim tarihlerini, kullanıcı hareketlerini, kitap hareketlerini veritabanında görebiliriz. Örneğin bir kişi sisteme giriş yapmışsa 
-kullanıcı hareketleri tablosuna xxx kullanıcısı sisteme giriş yaptı bilgisi düşmektedir.
+Hazırladığım bu panel yardımıyla verilen emanet kitap verme/alma işlemlerini gerçekleştirebilir, kullanıcı hareketlerini, kitap hareketlerini ve kitap kayıt hareketlerini veritabanında görebiliriz. 
+Örneğin bir kişi sisteme giriş yapmışsa kullanıcı hareketleri tablosuna xxx kullanıcısı sisteme giriş yaptı bilgisi düşmektedir.
 
 Kitap emanet verildikten sonra stok azaltma işlemi için, emaneti aldıktan sonra da stoğu güncelleme işlemi için Trigger yapısı kullanılmıştır.
-Duyurular ile ilgili tüm CRUD işlemleri için de AJAX yapısı kullanılmıştır.
 ASP.NET MVC kullanarak geliştirdiğim projemde dinamik veritabanı işlemleri için Entity Framework Code First kullanılmıştır.
 ###
 
@@ -16,13 +15,14 @@ ASP.NET MVC kullanarak geliştirdiğim projemde dinamik veritabanı işlemleri i
 - Asp.Net MVC
 - MSSQL Server
 - Entity Framework Code First
-- Generic Repository
+- Generic Repository Pattern
 - Html, Css
 - JavaScript
 - AJAX
 - Bootstrap
 - Sweet Alert
 - Fluent Validation
+- Trigger
   
 # Projenin Öne Çıkan Özellikleri
 - Veritabanı işlemleri için Entity Framework Code First kullanımı
